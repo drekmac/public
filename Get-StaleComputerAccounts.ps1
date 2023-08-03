@@ -32,7 +32,7 @@ $select = @(
     'SID'
     'LastLogonDate'
 )
-$Time = (Get-Date).Adddays( - ($Days))
+$Time = (Get-Date).Adddays( - ($DaysToExpire))
 $filter = { (LastLogonTimeStamp -lt $Time -and PasswordLastSet -lt $Time) -or (LastLogonTimeStamp -notlike '*' -and PasswordLastSet -lt $time) }
 
 $stale = Get-ADComputer -Filter $filter -SearchBase $searchbase -Properties PasswordLastSet | Sort-Object -Property PasswordLastSet
